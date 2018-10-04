@@ -1,3 +1,6 @@
-## 1.0.0
-
-- Initial version, created by Stagehand
+## 0.0.1
+- Create Deserializer
+```
+Jsona jsona = new Jsona();
+final town = jsona.deserialize(body);
+```

@@ -108,7 +108,7 @@ class JsonDeserializer {
                   relationItem['id'],
                   relationItem['type']
               );
-              readyRelations[k].push(
+              readyRelations[k].add(
                   this.buildModelByData(dataItem)
               );
             }

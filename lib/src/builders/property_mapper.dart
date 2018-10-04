@@ -46,14 +46,9 @@ class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
       model[propName] = relationships[propName];
     });
 
-    Iterable<String> newNames = relationships.keys;
-    var currentNames = model[RELATIONSHIP_NAMES_PROP];
+    List<String> newNames = relationships.keys.toList();
 
-    if (currentNames != null && currentNames.length > 0) {
-      // TODO
-    } else {
-      model[RELATIONSHIP_NAMES_PROP] = newNames;
-    }
+    model[RELATIONSHIP_NAMES_PROP] = newNames;
   }
 
 }

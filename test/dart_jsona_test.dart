@@ -31,5 +31,25 @@ void main() {
         expect(townsCollection, equals([town1['model'], town2['model']]));
       });
     });
+
+    group('serialize', () {
+      test('should build json with item, without included', () {
+        var jsonBody = jsona.serialize({'stuff': town1['model']});
+
+        print(jsonBody);
+
+        expect(jsonBody['data'], equals(town1['json']));
+        expect(jsonBody['included'], equals(null));
+      });
+
+      test('should build json with collection, with included', () {
+        var jsonBody = jsona.serialize({'stuff': user2['model'], 'includeNames': ['specialty', 'town.country']});
+
+        print(jsonBody);
+
+        expect(jsonBody['data'], equals(user2['json']));
+        expect(jsonBody['included'], equals([specialty1['json'], specialty2['json'], town2['json'], country2['json']]));
+      });
+    });
   });
 }

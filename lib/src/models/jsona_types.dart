@@ -1,8 +1,8 @@
 abstract class AbsModelPropertiesMapper {
   String getId(Map<String, dynamic> model);
   String getType(Map<String, dynamic> model);
-  Map<String, Object> getAttributes(Map<String, dynamic> model);
-  Map<String, Object> getRelationShips(Map<String, dynamic> model);
+  dynamic getAttributes(Map<String, dynamic> model);
+  dynamic getRelationShips(Map<String, dynamic> model);
 }
 
 abstract class AbsJsonPropertiesMapper {

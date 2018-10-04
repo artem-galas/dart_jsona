@@ -2,6 +2,53 @@ import 'package:dart_jsona/src/models/jsona_types.dart';
 
 final RELATIONSHIP_NAMES_PROP = 'relationshipNames';
 
+class ModelPropertiesMapper implements AbsModelPropertiesMapper {
+  @override
+  String getId(Map<String, dynamic> model) {
+    return model['id'];
+  }
+
+  @override
+  String getType(Map<String, dynamic> model) {
+    return model['type'];
+  }
+
+  @override
+  dynamic getRelationShips(Map<String, dynamic> model) {
+    var relationshipNames = model[RELATIONSHIP_NAMES_PROP];
+
+    var relationships = {};
+    relationshipNames.forEach((relationName) {
+      if (model[relationName] != null) {
+        relationships[relationName] = model[relationName];
+      }
+    });
+
+    return relationships;
+  }
+
+  @override
+  dynamic getAttributes(Map<String, dynamic> model) {
+    List<String> exceptProps = ['id', 'type', RELATIONSHIP_NAMES_PROP];
+
+    if (model[RELATIONSHIP_NAMES_PROP] is List) {
+      exceptProps.addAll(model[RELATIONSHIP_NAMES_PROP]);
+    } else if (model[RELATIONSHIP_NAMES_PROP] != null) {
+      print("Can't getAttributes correctly, ${RELATIONSHIP_NAMES_PROP} property of ${model['type']}-${model['id']} modelisn't array of relationship names");
+    }
+
+    var attributes = {};
+    model.keys.forEach((attrName) {
+      if (exceptProps.indexOf(attrName) == -1) {
+        attributes[attrName] = model[attrName];
+      }
+    });
+
+    return attributes;
+  }
+
+}
+
 class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
   @override
   Map<String, dynamic> createModel(String type) {

@@ -7,13 +7,13 @@ class Jsona {
   AbsModelPropertiesMapper modelPropertiesMapper = new ModelPropertiesMapper();
   JsonPropertiesMapper jsonPropertiesMapper = new JsonPropertiesMapper();
 
-  Map<String, Object> serialize(Map<String, Object> stuff, [List<String> includeNames]){
+  Map<String, Object> serialize({Map<String, Object> stuff, List<String> includeNames}){
     if (stuff == null) {
-      throw 'Jsona can not serialize, stuff is not passed';
+      throw ArgumentError('Jsona can not serialize, stuff is not passed');
     }
 
     ModelSerializer modelSerializer = new ModelSerializer(modelPropertiesMapper);
-    modelSerializer.setStuff(stuff['stuff']);
+    modelSerializer.setStuff(stuff);
     if (includeNames != null) {
       modelSerializer.setIncludedNames(includeNames);
     }
@@ -23,7 +23,7 @@ class Jsona {
 
   dynamic deserialize(Map<String, Object> body) {
     if(body == null) {
-      throw 'Json can not deserialize, body is not passed';
+      throw ArgumentError('Json can not deserialize, body is not passed');
     }
 
     JsonDeserializer modelBuilder = new JsonDeserializer(jsonPropertiesMapper);

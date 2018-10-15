@@ -1,6 +1,6 @@
 import 'package:dart_jsona/src/models/jsona_types.dart';
 
-class JsonDeserializer implements JsonaModelBuilder  {
+class JsonDeserializer {
   dynamic body;
   AbsJsonPropertiesMapper propertiesMapper;
   Map<String, Object> includedInObject;
@@ -25,8 +25,7 @@ class JsonDeserializer implements JsonaModelBuilder  {
     this.body = body;
   }
 
-  @override
-  Map<String, dynamic> build() {
+  dynamic build() {
     var data = body['data'];
     var stuff;
 

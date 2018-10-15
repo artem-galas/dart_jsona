@@ -15,9 +15,13 @@ class ModelPropertiesMapper implements AbsModelPropertiesMapper {
 
   @override
   dynamic getRelationShips(Map<String, dynamic> model) {
-    var relationshipNames = model[RELATIONSHIP_NAMES_PROP];
+    List<String> relationshipNames = model[RELATIONSHIP_NAMES_PROP];
 
-    var relationships = {};
+    if (relationshipNames == null) {
+      return;
+    }
+
+    Map<String, dynamic> relationships = {};
     relationshipNames.forEach((relationName) {
       if (model[relationName] != null) {
         relationships[relationName] = model[relationName];

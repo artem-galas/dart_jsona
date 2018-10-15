@@ -3,7 +3,7 @@ import 'package:dart_jsona/dart_jsona.dart';
 main() {
   Jsona jsona = new Jsona();
 
-  final body = {
+  Map<String, dynamic> body = {
     'data': {
       'type': 'town',
       'id': '123',
@@ -28,7 +28,7 @@ main() {
     }]
   };
 
-  final town = jsona.deserialize(body);
+  final dynamic town = jsona.deserialize(body);
 
   print(town);
   /**
@@ -41,5 +41,35 @@ main() {
    *    id: 32, name: Spain
    *  },
    *  relationshipNames: [country]}
+   */
+
+
+  Map<String, Object> jsonBody = jsona.serialize(stuff: town, includeNames: ['country']);
+
+  print(jsonBody);
+  /**
+   * {
+   *   data: {
+   *     id: 123,
+   *     type: town,
+   *     attributes: {
+   *       name: Barcelona
+   *     },
+   *     relationships: {
+   *       country: {
+   *         data: {
+   *           id: 32, type: country
+   *         }
+   *       }
+   *     }
+   *   },
+   *   included: [{
+   *     id: 32,
+   *     type: country,
+   *     attributes: {
+   *       name: Spain
+   *     }
+   *   }]
+   * }
    */
 }

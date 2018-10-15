@@ -1,11 +1,8 @@
 import 'package:test/test.dart';
 
 import 'package:dart_jsona/dart_jsona.dart';
-import 'package:dart_jsona/src/models/jsona_types.dart';
 
 import 'mock.dart';
-
-JsonApiBody user;
 
 void main() {
   group('Jsona', () {

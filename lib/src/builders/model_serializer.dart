@@ -1,7 +1,7 @@
 import 'package:dart_jsona/src/models/jsona_types.dart';
 
 
-class ModelSerializer {
+class ModelSerializer implements JsonaModelBuilder {
   AbsModelPropertiesMapper propertiesMapper;
   Map<String, Object> stuff;
   Map<String, Object> includeNamesTree;
@@ -20,7 +20,8 @@ class ModelSerializer {
 
   setIncludedNames(List<String> includeNames) {}
 
-  Map<String, Object> build() {
+  @override
+  Map<String, dynamic> build() {
     if (propertiesMapper == null) {
       throw 'ModelsSerializer cannot build, propertiesMapper is not set';
     } else if (stuff == null) {

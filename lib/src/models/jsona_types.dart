@@ -17,7 +17,7 @@ abstract class AbsJsonPropertiesMapper {
 }
 
 abstract class JsonaModelBuilder {
-  Map<String, Object> build();
+  Map<String, dynamic> build();
 }
 
 abstract class JsonApiLinks {

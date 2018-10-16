@@ -75,12 +75,12 @@ class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
   }
 
   @override
-  void setLinks(Map<String, dynamic> model, JsonApiLinks links) {
+  void setLinks(Map<String, dynamic> model, Map<String, String> links) {
     model['links'] = links;
   }
 
   @override
-  void setRelationshipLinks(Map<String, dynamic> parentModel, String relationName, JsonApiLinks links) {
+  void setRelationshipLinks(Map<String, dynamic> parentModel, String relationName, Map<String, String> links) {
     // TODO: implement setRelationshipLinks
   }
 

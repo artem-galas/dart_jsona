@@ -1,5 +1,4 @@
 import 'package:dart_jsona/src/models/jsona_types.dart';
-
 import 'package:dart_jsona/src/builders/util.dart';
 
 class ModelSerializer implements JsonaModelBuilder {
@@ -43,28 +42,20 @@ class ModelSerializer implements JsonaModelBuilder {
       int collectionLength = stuff.length;
       List<Object> data = [];
 
-      for(int i = 0; i < collectionLength; i ++) {
+      for (int i = 0; i < collectionLength; i++) {
         data.add(buildDataByModel(stuff[i]));
 
-        buildIncludedByModel(
-            stuff[i],
-            this.includeNamesTree,
-            uniqueIncluded
-        );
+        buildIncludedByModel(stuff[i], this.includeNamesTree, uniqueIncluded);
       }
       body['data'] = data;
     } else if (stuff != null) {
       body['data'] = buildDataByModel(stuff);
-      this.buildIncludedByModel(
-          stuff,
-          this.includeNamesTree,
-          uniqueIncluded
-      );
+      this.buildIncludedByModel(stuff, this.includeNamesTree, uniqueIncluded);
     } else if (stuff == null) {
       body['data'] = null;
     }
 
-    if(uniqueIncluded.keys.length > 0) {
+    if (uniqueIncluded.keys.length > 0) {
       body['included'] = [];
       List<String> includeUniqueKeys = uniqueIncluded.keys.toList();
 
@@ -99,7 +90,7 @@ class ModelSerializer implements JsonaModelBuilder {
   dynamic buildRelationshipsByModel(Map<String, dynamic> model) {
     var relations = propertiesMapper.getRelationShips(model);
 
-    if(relations == null) {
+    if (relations == null) {
       return;
     }
 
@@ -108,12 +99,12 @@ class ModelSerializer implements JsonaModelBuilder {
     relations.keys.forEach((key) {
       dynamic relation = relations[key];
 
-      if(relation is List) {
+      if (relation is List) {
         List<dynamic> relationshipData = [];
         int relationLength = relation.length;
 
-        for(int i = 0; i < relationLength; i ++) {
-          Map<String,Object> item = {
+        for (int i = 0; i < relationLength; i++) {
+          Map<String, Object> item = {
             'id': propertiesMapper.getId(relation[i]),
             'type': propertiesMapper.getType(relation[i])
           };
@@ -123,26 +114,17 @@ class ModelSerializer implements JsonaModelBuilder {
           }
         }
 
-        relationships[key] = {
-          'data': relationshipData
-        };
+        relationships[key] = {'data': relationshipData};
       } else if (relation != null) {
-        Map<String, Object> item = {
-          'id': propertiesMapper.getId(relation),
-          'type': propertiesMapper.getType(relation)
-        };
+        Map<String, Object> item = {'id': propertiesMapper.getId(relation), 'type': propertiesMapper.getType(relation)};
 
-        if(item['type'] != null) {
-          relationships[key] = {
-            'data': item
-          };
+        if (item['type'] != null) {
+          relationships[key] = {'data': item};
         } else {
           print("Can't create data for relationship $key, it doesn't have 'type', it was skipped");
         }
       } else {
-        relationships[key] = {
-          'data': relation
-        };
+        relationships[key] = {'data': relation};
       }
     });
 
@@ -150,10 +132,7 @@ class ModelSerializer implements JsonaModelBuilder {
   }
 
   void buildIncludedByModel(
-      Map<String, Object> model,
-      Map<String, dynamic> includeTree,
-      Map<String, Object> builtIncluded
-    ) {
+      Map<String, Object> model, Map<String, dynamic> includeTree, Map<String, Object> builtIncluded) {
     if (includeTree == null) {
       return;
     }
@@ -167,8 +146,8 @@ class ModelSerializer implements JsonaModelBuilder {
     var includeNames = includeTree.keys.toList();
     var includeNamesLength = includeNames.length;
 
-    for(int i = 0; i < includeNamesLength; i ++) {
-      var currentRelationName = includeNames[i];
+    for (int i = 0; i < includeNamesLength; i++) {
+      String currentRelationName = includeNames[i];
       var relation = modelRelationships[currentRelationName];
 
       if (relation != null) {

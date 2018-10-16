@@ -21,7 +21,7 @@ class JsonDeserializer {
     return '';
   }
 
-  void setJsonParsedObject(Map<String, dynamic> body ){
+  void setJsonParsedObject(Map<String, dynamic> body) {
     this.body = body;
   }
 
@@ -29,11 +29,11 @@ class JsonDeserializer {
     var data = body['data'];
     var stuff;
 
-    if(data is List) {
+    if (data is List) {
       stuff = [];
       var collectionLength = data.length;
 
-      for(var i = 0; i < collectionLength; i ++) {
+      for (var i = 0; i < collectionLength; i++) {
         if (data[i] != null) {
           var model = buildModelByData(data[i]);
 
@@ -82,43 +82,34 @@ class JsonDeserializer {
     return model;
   }
 
-
   Map<String, dynamic> buildRelationsByData(Map<String, dynamic> data, Map<String, dynamic> model) {
     Map<String, dynamic> readyRelations = {};
 
-    if(data['relationships'] != null) {
+    if (data['relationships'] != null) {
       if (data['relationships'] is Map) {
         data['relationships'].keys.forEach((k) {
           Map<String, dynamic> relation = data['relationships'][k];
 
-          if(relation['data'] is Iterable) {
+          if (relation['data'] is Iterable) {
             readyRelations[k] = [];
 
             int relationItemsLength = relation['data'].length;
             var relationItem;
 
-            for(int i = 0; i < relationItemsLength; i ++) {
+            for (int i = 0; i < relationItemsLength; i++) {
               relationItem = relation['data'][i];
 
-              if(relationItem == null) {
+              if (relationItem == null) {
                 return null;
               }
 
-              var dataItem = buildDataFromIncludedOrData(
-                  relationItem['id'],
-                  relationItem['type']
-              );
-              readyRelations[k].add(
-                  this.buildModelByData(dataItem)
-              );
+              var dataItem = buildDataFromIncludedOrData(relationItem['id'], relationItem['type']);
+              readyRelations[k].add(this.buildModelByData(dataItem));
             }
           } else if (relation['data'] != null) {
-            var dataItem = buildDataFromIncludedOrData(
-                relation['data']['id'],
-                relation['data']['type']
-            );
+            var dataItem = buildDataFromIncludedOrData(relation['data']['id'], relation['data']['type']);
             readyRelations[k] = buildModelByData(dataItem);
-          } else if(relation['data'] == null) {
+          } else if (relation['data'] == null) {
             readyRelations[k] = null;
           }
 
@@ -147,18 +138,18 @@ class JsonDeserializer {
     if (dataItem != null) {
       return dataItem;
     } else {
-      return { 'id': id, 'type': type };
+      return {'id': id, 'type': type};
     }
   }
 
   Map<String, Object> buildIncludedInObject() {
-    if(includedInObject == null) {
+    if (includedInObject == null) {
       this.includedInObject = {};
 
-      if(body['included'] != null) {
+      if (body['included'] != null) {
         int includedLength = body['included'].length;
 
-        for(int i = 0; i < includedLength; i ++) {
+        for (int i = 0; i < includedLength; i++) {
           var item = body['included'][i];
           var key = item['type'] + item['id'];
           includedInObject[key] = item;

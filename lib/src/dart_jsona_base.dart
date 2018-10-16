@@ -1,13 +1,13 @@
-import 'package:dart_jsona/src/models/jsona_types.dart';
-import 'package:dart_jsona/src/builders/json_deserializer.dart';
 import 'package:dart_jsona/src/builders/model_serializer.dart';
 import 'package:dart_jsona/src/builders/property_mapper.dart';
+import 'package:dart_jsona/src/builders/json_deserializer.dart';
+import 'package:dart_jsona/src/models/jsona_types.dart';
 
 class Jsona {
   AbsModelPropertiesMapper modelPropertiesMapper = new ModelPropertiesMapper();
   JsonPropertiesMapper jsonPropertiesMapper = new JsonPropertiesMapper();
 
-  Map<String, Object> serialize({Map<String, Object> stuff, List<String> includeNames}){
+  Map<String, Object> serialize({Map<String, Object> stuff, List<String> includeNames}) {
     if (stuff == null) {
       throw ArgumentError('Jsona can not serialize, stuff is not passed');
     }
@@ -22,7 +22,7 @@ class Jsona {
   }
 
   dynamic deserialize(Map<String, Object> body) {
-    if(body == null) {
+    if (body == null) {
       throw ArgumentError('Json can not deserialize, body is not passed');
     }
 

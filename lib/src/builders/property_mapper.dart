@@ -38,7 +38,8 @@ class ModelPropertiesMapper implements AbsModelPropertiesMapper {
     if (model[RELATIONSHIP_NAMES_PROP] is List) {
       exceptProps.addAll(model[RELATIONSHIP_NAMES_PROP]);
     } else if (model[RELATIONSHIP_NAMES_PROP] != null) {
-      print("Can't getAttributes correctly, ${RELATIONSHIP_NAMES_PROP} property of ${model['type']}-${model['id']} modelisn't array of relationship names");
+      print(
+          "Can't getAttributes correctly, ${RELATIONSHIP_NAMES_PROP} property of ${model['type']}-${model['id']} model isn't array of relationship names");
     }
 
     var attributes = {};
@@ -50,15 +51,12 @@ class ModelPropertiesMapper implements AbsModelPropertiesMapper {
 
     return attributes;
   }
-
 }
 
 class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
   @override
   Map<String, dynamic> createModel(String type) {
-    return {
-      'type': type
-    };
+    return {'type': type};
   }
 
   @override
@@ -72,12 +70,12 @@ class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
   }
 
   @override
-  void setMeta(Map<String, dynamic> model, Map<String, dynamic>  meta) {
+  void setMeta(Map<String, dynamic> model, Map<String, dynamic> meta) {
     model['meta'] = meta;
   }
 
   @override
-  void setLinks(Map<String, dynamic>  model, JsonApiLinks links) {
+  void setLinks(Map<String, dynamic> model, JsonApiLinks links) {
     model['links'] = links;
   }
 
@@ -92,7 +90,7 @@ class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
   }
 
   @override
-  void setRelationships(Map<String, dynamic> model, Map<String, dynamic > relationships) {
+  void setRelationships(Map<String, dynamic> model, Map<String, dynamic> relationships) {
     relationships.keys.forEach((propName) {
       model[propName] = relationships[propName];
     });
@@ -101,5 +99,4 @@ class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
 
     model[RELATIONSHIP_NAMES_PROP] = newNames;
   }
-
 }

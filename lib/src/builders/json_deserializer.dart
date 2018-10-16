@@ -14,7 +14,7 @@ class JsonDeserializer {
     this.propertiesMapper = pm;
   }
 
-  createEntityKey(data) {
+  String createEntityKey(data) {
     if (data['type'] != null && data['id'] != null) {
       return '${data['type']}-${data['id']}';
     }
@@ -49,7 +49,7 @@ class JsonDeserializer {
     return stuff;
   }
 
-  buildModelByData(Map<String, Object> data) {
+  Map<String, dynamic> buildModelByData(Map<String, Object> data) {
     var entityKey = createEntityKey(data);
 
     var model = propertiesMapper.createModel(data['type']);

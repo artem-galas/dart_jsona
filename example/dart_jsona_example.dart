@@ -1,6 +1,6 @@
 import 'package:dart_jsona/dart_jsona.dart';
 
-main() {
+void main() {
   Jsona jsona = new Jsona();
 
   Map<String, dynamic> body = {

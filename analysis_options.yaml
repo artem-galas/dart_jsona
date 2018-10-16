@@ -5,6 +5,10 @@ analyzer:
 # Lint rules and documentation, see http://dart-lang.github.io/linter/lints
 linter:
   rules:
+    - always_declare_return_types
+    - annotate_overrides
+    - avoid_empty_else
+    - camel_case_types
     - cancel_subscriptions
     - hash_and_equals
     - iterable_contains_unrelated_type

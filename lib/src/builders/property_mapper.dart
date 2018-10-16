@@ -62,7 +62,7 @@ class JsonPropertiesMapper implements AbsJsonPropertiesMapper {
   }
 
   @override
-  setId(Map<String, dynamic> model, String id) {
+  void setId(Map<String, dynamic> model, String id) {
     model['id'] = id;
   }
 

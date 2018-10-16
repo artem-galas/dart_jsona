@@ -1,6 +1,6 @@
 # dart_jsona
 
-Is'a ported to dart - [Jsona TS](https://github.com/olosegres/jsona)
+It's a ported to dart - [Jsona TS](https://github.com/olosegres/jsona)
 
 Framework agnostic, customizable library that provide data formatters to simplify work with JSON API v1.0 specification.
 

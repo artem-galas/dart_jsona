@@ -19,32 +19,3 @@ abstract class AbsJsonPropertiesMapper {
 abstract class JsonaModelBuilder {
   Map<String, dynamic> build();
 }
-
-abstract class JsonApiLinks {
-  String self;
-  String related;
-}
-
-abstract class JsonApiBody {
-  JsonApiData data;
-  List<JsonApiData> included;
-}
-
-abstract class JsonApiData {
-  String type;
-  String id;
-  Map<String, Object> attributes;
-  Map<String, Object> meta;
-  JsonApiLinks links;
-}
-
-abstract class JsonApiRelationshipData {
-  String type;
-  String id;
-}
-
-abstract class JsonApiRelation {
-  JsonApiRelationshipData data;
-  JsonApiLinks link;
-  Map<String, Object> meta;
-}

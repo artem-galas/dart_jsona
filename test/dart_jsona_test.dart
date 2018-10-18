@@ -27,6 +27,13 @@ void main() {
 
         expect(townsCollection, equals([town1['model'], town2['model']]));
       });
+
+      test('should deserialize example from JSONapi.org', () {
+
+        dynamic jsonApiModel = jsona.deserialize(jsonApiExample);
+
+        expect(jsonApiModel, equals(jsonApiModel));
+      });
     });
 
     group('serialize', () {

@@ -1,6 +1,6 @@
 name: dart_jsona
 description: Deserialize or serialize JSON API document.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/artem-galas/dart_jsona
 author: artem_galas <artem.galas@gmail.com>
 

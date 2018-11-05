@@ -18,7 +18,7 @@ class ModelPropertiesMapper implements AbsModelPropertiesMapper {
     List<String> relationshipNames = model[RELATIONSHIP_NAMES_PROP];
 
     if (relationshipNames == null) {
-      return;
+      return null;
     }
 
     Map<String, dynamic> relationships = {};

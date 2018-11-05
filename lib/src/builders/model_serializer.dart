@@ -7,11 +7,11 @@ class ModelSerializer implements JsonaModelBuilder {
   Map<String, Object> includeNamesTree = {};
 
   ModelSerializer([AbsModelPropertiesMapper propertiesMapper]) {
-    this.setPropertiesMapper(propertiesMapper);
+    setPropertiesMapper(propertiesMapper);
   }
 
   void setPropertiesMapper(AbsModelPropertiesMapper setPropertiesMapper) {
-    this.propertiesMapper = setPropertiesMapper;
+    propertiesMapper = setPropertiesMapper;
   }
 
   void setStuff(Map<String, Object> stuff) {
@@ -45,12 +45,12 @@ class ModelSerializer implements JsonaModelBuilder {
       for (int i = 0; i < collectionLength; i++) {
         data.add(buildDataByModel(stuff[i]));
 
-        buildIncludedByModel(stuff[i], this.includeNamesTree, uniqueIncluded);
+        buildIncludedByModel(stuff[i], includeNamesTree, uniqueIncluded);
       }
       body['data'] = data;
     } else if (stuff != null) {
       body['data'] = buildDataByModel(stuff);
-      this.buildIncludedByModel(stuff, this.includeNamesTree, uniqueIncluded);
+      buildIncludedByModel(stuff, includeNamesTree, uniqueIncluded);
     } else if (stuff == null) {
       body['data'] = null;
     }
@@ -78,7 +78,7 @@ class ModelSerializer implements JsonaModelBuilder {
       throw 'ModelsSerializer cannot buildDataByModel, type is not set or incorrect';
     }
 
-    var relationships = this.buildRelationshipsByModel(model);
+    var relationships = buildRelationshipsByModel(model);
 
     if (relationships != null) {
       data['relationships'] = relationships;
@@ -91,7 +91,7 @@ class ModelSerializer implements JsonaModelBuilder {
     var relations = propertiesMapper.getRelationShips(model);
 
     if (relations == null) {
-      return;
+      return null;
     }
 
     var relationships = {};
@@ -172,7 +172,7 @@ class ModelSerializer implements JsonaModelBuilder {
       builtIncluded[includeKey] = buildDataByModel(relationModel);
 
       if (subIncludeTree != null) {
-        this.buildIncludedByModel(relationModel, subIncludeTree, builtIncluded);
+        buildIncludedByModel(relationModel, subIncludeTree, builtIncluded);
       }
     }
   }

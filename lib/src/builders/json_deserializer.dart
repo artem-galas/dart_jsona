@@ -7,11 +7,11 @@ class JsonDeserializer {
   Map<String, Object> cachedModels = {};
 
   JsonDeserializer(propertiesMapper) {
-    this.setPropertiesMapper(propertiesMapper);
+    setPropertiesMapper(propertiesMapper);
   }
 
   void setPropertiesMapper(pm) {
-    this.propertiesMapper = pm;
+    propertiesMapper = pm;
   }
 
   String createEntityKey(data) {
@@ -65,11 +65,11 @@ class JsonDeserializer {
       }
 
       if (data['meta'] != null) {
-        this.propertiesMapper.setMeta(model, data['meta']);
+        propertiesMapper.setMeta(model, data['meta']);
       }
 
       if (data['links'] != null) {
-        this.propertiesMapper.setLinks(model, data['links']);
+        propertiesMapper.setLinks(model, data['links']);
       }
 
       var relationships = buildRelationsByData(data, model);
@@ -103,22 +103,26 @@ class JsonDeserializer {
                 return null;
               }
 
-              var dataItem = buildDataFromIncludedOrData(relationItem['id'], relationItem['type']);
-              readyRelations[k].add(this.buildModelByData(dataItem));
+              var dataItem = buildDataFromIncludedOrData(
+                  relationItem['id'], relationItem['type']);
+              readyRelations[k].add(buildModelByData(dataItem));
             }
           } else if (relation['data'] != null) {
-            var dataItem = buildDataFromIncludedOrData(relation['data']['id'], relation['data']['type']);
+            var dataItem = buildDataFromIncludedOrData(
+                relation['data']['id'], relation['data']['type']);
             readyRelations[k] = buildModelByData(dataItem);
           } else if (relation['data'] == null) {
             readyRelations[k] = null;
           }
 
           if (relation['links'] != null) {
-            this.propertiesMapper.setRelationshipLinks(model, k, relation['links']);
+            propertiesMapper
+                .setRelationshipLinks(model, k, relation['links']);
           }
 
           if (relation['meta'] != null) {
-            this.propertiesMapper.setRelationshipMeta(model, k, relation['meta']);
+            propertiesMapper
+                .setRelationshipMeta(model, k, relation['meta']);
           }
         });
       }
@@ -144,7 +148,7 @@ class JsonDeserializer {
 
   Map<String, Object> buildIncludedInObject() {
     if (includedInObject == null) {
-      this.includedInObject = {};
+      includedInObject = {};
 
       if (body['included'] != null) {
         int includedLength = body['included'].length;

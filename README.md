@@ -1,5 +1,9 @@
 # dart_jsona
 
+[![pub package](https://img.shields.io/pub/v/dart_jsona.svg)](https://pub.dartlang.org/packages/dart_jsona)
+
+[![Build Status](https://travis-ci.org/artem-galas/dart_jsona.svg?branch=master)](https://travis-ci.org/artem-galas/dart_jsona)
+
 It's a ported to dart - [Jsona TS](https://github.com/olosegres/jsona)
 
 Framework agnostic, customizable library that provide data formatters to simplify work with JSON API v1.0 specification.
@@ -7,6 +11,14 @@ Framework agnostic, customizable library that provide data formatters to simplif
 This package don't have any dependencies and pretty simple. It used `Map<String, dynamic>` a lot 😑
 
 It was designed to work with [json_serializable](https://pub.dartlang.org/packages/json_serializable)
+
+## Install
+In your `pubspec.yaml`
+
+```
+dependencies:
+    dart_jsona: ^0.0.1
+```
 
 ## Usage
 
@@ -72,29 +84,29 @@ main() {
     print(newJson);
 
     /**
-       {
-         data: {
-           id: 123,
-           type: town,
-           attributes: {
-             name: Barcelona
-           },
-           relationships: {
-             country: {
-               data: {
-                 id: 32, type: country
-               }
-             }
+    {
+     data: {
+       id: 123,
+       type: town,
+       attributes: {
+         name: Barcelona
+       },
+       relationships: {
+         country: {
+           data: {
+             id: 32, type: country
            }
-         },
-         included: [{
-           id: 32,
-           type: country,
-           attributes: {
-             name: Spain
-           }
-         }]
+         }
        }
+     },
+     included: [{
+       id: 32,
+       type: country,
+       attributes: {
+         name: Spain
+       }
+     }]
+    }
     */
 }
 ```

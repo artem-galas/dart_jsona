@@ -84,28 +84,28 @@ main() {
     print(newJson);
 
     /**
-    {
-     data: {
-       id: 123,
-       type: town,
-       attributes: {
-         name: Barcelona
-       },
-       relationships: {
-         country: {
-           data: {
+      {
+        data: {
+        id: 123,
+        type: town,
+        attributes: {
+           name: Barcelona
+        },
+        relationships: {
+          country: {
+            data: {
              id: 32, type: country
-           }
-         }
-       }
-     },
-     included: [{
-       id: 32,
-       type: country,
-       attributes: {
-         name: Spain
-       }
-     }]
+            }
+          }
+        }
+      },
+      included: [{
+        id: 32,
+        type: country,
+        attributes: {
+          name: Spain
+        }
+      }]
     }
     */
 }
@@ -249,7 +249,7 @@ print(jsonApiModel);
       relationshipNames: [author, comments]
     }
   ];
-**/
+*/
 ```
 
 ### Deserialize in angular service + `dart:convert` + [json_serializable](https://pub.dartlang.org/packages/json_serializable)

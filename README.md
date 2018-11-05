@@ -307,6 +307,31 @@ class PostModel {
 }
 ```
 
+### Serializer in angular service +  + `dart:convert` + [json_serializable](https://pub.dartlang.org/packages/json_serializable)
+```
+Furute<PostModel> createPost(PostModel data) async {
+  try {
+    final response = await _http.post('${apiUrl}/posts', body: _decodeRequest(data));
+
+    return PostModel.fromJson(_extractData(response));
+  } catch(e) {
+    throw _handleError(e);
+  }
+}
+
+dynamic _decodeRequest(dynamic body) {
+  // initialize Jsona
+  Jsona jsona = new Jsona();
+  body = body.toJson();
+
+  // add type property
+  body['type'] = 'post';
+
+  // serialize body
+  return json.encode(jsona.serialize(stuff: body));
+}
+```
+
 ## Contributing
 
 Contributing are welcome.

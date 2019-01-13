@@ -30,7 +30,8 @@ class ModelSerializer implements JsonaModelBuilder {
   @override
   Map<String, dynamic> build() {
     if (propertiesMapper == null) {
-      throw ArgumentError('ModelsSerializer cannot build, propertiesMapper is not set');
+      throw ArgumentError(
+        'ModelsSerializer cannot build, propertiesMapper is not set');
     } else if (stuff == null) {
       throw ArgumentError('ModelsSerializer cannot build, stuff is not set');
     }
@@ -116,12 +117,16 @@ class ModelSerializer implements JsonaModelBuilder {
 
         relationships[key] = {'data': relationshipData};
       } else if (relation != null) {
-        Map<String, Object> item = {'id': propertiesMapper.getId(relation), 'type': propertiesMapper.getType(relation)};
+        Map<String, Object> item = {
+          'id': propertiesMapper.getId(relation),
+          'type': propertiesMapper.getType(relation)
+        };
 
         if (item['type'] != null) {
           relationships[key] = {'data': item};
         } else {
-          print("Can't create data for relationship $key, it doesn't have 'type', it was skipped");
+          print(
+            "Can't create data for relationship $key, it doesn't have 'type', it was skipped");
         }
       } else {
         relationships[key] = {'data': relation};
@@ -131,8 +136,8 @@ class ModelSerializer implements JsonaModelBuilder {
     return relationships;
   }
 
-  void buildIncludedByModel(
-      Map<String, Object> model, Map<String, dynamic> includeTree, Map<String, Object> builtIncluded) {
+  void buildIncludedByModel(Map<String, Object> model,
+    Map<String, dynamic> includeTree, Map<String, Object> builtIncluded) {
     if (includeTree == null) {
       return;
     }
@@ -156,17 +161,21 @@ class ModelSerializer implements JsonaModelBuilder {
 
           for (int r = 0; r < relationModelsLength; r++) {
             var relationModel = relation[r];
-            buildIncludedItem(relationModel, includeTree[currentRelationName], builtIncluded);
+            buildIncludedItem(
+              relationModel, includeTree[currentRelationName], builtIncluded);
           }
         } else {
-          buildIncludedItem(relation, includeTree[currentRelationName], builtIncluded);
+          buildIncludedItem(
+            relation, includeTree[currentRelationName], builtIncluded);
         }
       }
     }
   }
 
-  void buildIncludedItem(Map<String, dynamic> relationModel, subIncludeTree, builtIncluded) {
-    var includeKey = propertiesMapper.getType(relationModel) + propertiesMapper.getId(relationModel);
+  void buildIncludedItem(
+    Map<String, dynamic> relationModel, subIncludeTree, builtIncluded) {
+    var includeKey = propertiesMapper.getType(relationModel) +
+      propertiesMapper.getId(relationModel);
 
     if (builtIncluded[includeKey] == null) {
       builtIncluded[includeKey] = buildDataByModel(relationModel);

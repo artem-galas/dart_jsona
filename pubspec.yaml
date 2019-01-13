@@ -1,6 +1,6 @@
 name: dart_jsona
 description: Deserialize or serialize JSON API document. Data formatter that creates simplified objects from JSON, creates JSON from the same simplified objects (in according with JSON API specification)
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/artem-galas/dart_jsona
 author: artem_galas <artem.galas@gmail.com>
 

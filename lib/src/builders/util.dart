@@ -1,4 +1,5 @@
-void createIncludeNamesTree(String namesChain, Map<String, Object> includeTree) {
+void createIncludeNamesTree(
+  String namesChain, Map<String, Object> includeTree) {
   List<String> namesArray = namesChain.split('.');
   String currentIncludeName = namesArray.removeAt(0);
   int chainHasMoreNames = namesArray.length;

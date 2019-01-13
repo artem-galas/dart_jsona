@@ -103,26 +103,22 @@ class JsonDeserializer {
                 return null;
               }
 
-              var dataItem = buildDataFromIncludedOrData(
-                  relationItem['id'], relationItem['type']);
+              var dataItem = buildDataFromIncludedOrData(relationItem['id'], relationItem['type']);
               readyRelations[k].add(buildModelByData(dataItem));
             }
           } else if (relation['data'] != null) {
-            var dataItem = buildDataFromIncludedOrData(
-                relation['data']['id'], relation['data']['type']);
+            var dataItem = buildDataFromIncludedOrData(relation['data']['id'], relation['data']['type']);
             readyRelations[k] = buildModelByData(dataItem);
           } else if (relation['data'] == null) {
             readyRelations[k] = null;
           }
 
           if (relation['links'] != null) {
-            propertiesMapper
-                .setRelationshipLinks(model, k, relation['links']);
+            propertiesMapper.setRelationshipLinks(model, k, relation['links']);
           }
 
           if (relation['meta'] != null) {
-            propertiesMapper
-                .setRelationshipMeta(model, k, relation['meta']);
+            propertiesMapper.setRelationshipMeta(model, k, relation['meta']);
           }
         });
       }
